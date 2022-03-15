@@ -80,6 +80,7 @@ for file in os.scandir(datapath):
             mean = mne_features.univariate.compute_mean(data)
             var = mne_features.univariate.compute_variance(data)
             std = mne_features.univariate.compute_std(data)
+            
             for k in mobility,higuchi,power,dwt,skew,kurt,hurst,katz,comp,mean,var,std,tk,decorr:
                 for l in k:
                     features.append(l)
