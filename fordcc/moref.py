@@ -31,6 +31,7 @@ channels = [2,4,1,3,7,11,13,31,29,25,20,17,21,19]
 ch = ["F3" ,"FC5" ,"AF3", "F7", "T7", "P7", "O1" ,"O2" ,"P8" ,"T8" ,"F8" ,"AF4", "FC6", "F4"]
 
 freq_bands = numpy.array([8,12,30])
+freq_bands2 = numpy.array([0.5,4,8,13,30])
 
 x_data=[]
 y_label=[]
@@ -95,7 +96,7 @@ for file in os.scandir(datapath):
                     app_e = mne_features.univariate.compute_app_entropy(data)
                     samp_e = mne_features.univariate.compute_samp_entropy(data)
                     svd = mne_features.univariate.compute_svd_entropy(data)
-                    en = mne_features.univariate.compute_energy_freq_bands(128, data)
+                    en = mne_features.univariate.compute_energy_freq_bands(128, data,freq_bands=freq_bands2)
                     for k in en,mobility,higuchi,power,dwt,skew,kurt,hurst,katz,comp,mean,var,std,tk,decorr,app_e,samp_e,svd:
                         for l in k:
                             features.append(l)
@@ -130,10 +131,11 @@ for file in os.scandir(datapath):
            except:
                fails+=1  
     grouplabel+= 1
+
     
 x_data = numpy.asarray(x_data)
 y_label = numpy.asarray(y_label)
-numpy.save("moref",x_data)
-numpy.save("moref_labels",y_label)  
+numpy.save("moref2",x_data)
+numpy.save("moref2_labels",y_label)  
 print("Time Elapsed: {}",datetime.now()-start)  
          
